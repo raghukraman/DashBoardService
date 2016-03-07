@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -12,6 +13,7 @@ import com.raghu.dashboard.dao.TaskDAOImpl;
 
 @Import(MongoConfiguration.class)
 @Configuration
+@EnableWebMvc
 @ComponentScan(basePackages = { "com.raghu.dashboard.api", "com.raghu.dashboard.dao" })
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 

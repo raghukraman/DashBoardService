@@ -25,7 +25,6 @@ public class AppInitalizer implements WebApplicationInitializer {
 	
 	private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-//        context.setConfigLocation("com.raghu.dashboard.config");
         context.register(com.raghu.dashboard.config.WebConfig.class);
         context.scan("com.raghu.dashboard.api");
         return context;
