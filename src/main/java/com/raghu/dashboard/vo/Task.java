@@ -48,6 +48,9 @@ public class Task {
 
 
 	public String getUser() {
+		if (user==null) {
+			user = "";
+		}
 		return user;
 	}
 
@@ -70,7 +73,7 @@ public class Task {
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", name=" + name + ", createDate="
-				+ createDate + ", user=" + user + ", status=" + status + "]";
+				+ createDate + ", user=" + getUser() + ", status=" + status + "]";
 	}
 
 	
