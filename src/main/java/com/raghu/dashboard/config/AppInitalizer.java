@@ -1,5 +1,6 @@
 package com.raghu.dashboard.config;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -10,6 +11,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.raghu.dashboard.filter.CORSFilter;
+
 
 public class AppInitalizer implements WebApplicationInitializer {
 
@@ -18,6 +21,12 @@ public class AppInitalizer implements WebApplicationInitializer {
 			throws ServletException {
 		WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
+        
+        FilterRegistration.Dynamic springSecurityFilterChain = servletContext.addFilter("corsFilter", new CORSFilter());
+        springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
+        springSecurityFilterChain.setAsyncSupported(true);
+        
+        
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/*");
@@ -29,5 +38,5 @@ public class AppInitalizer implements WebApplicationInitializer {
         context.scan("com.raghu.dashboard.api");
         return context;
     }
-
+	
 }

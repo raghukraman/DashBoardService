@@ -10,11 +10,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.raghu.dashboard.dao.ITaskDAO;
 import com.raghu.dashboard.dao.TaskDAOImpl;
+import com.raghu.dashboard.service.DashBoardServiceImpl;
+import com.raghu.dashboard.service.IDashBoardService;
+
 
 @Import(MongoConfiguration.class)
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.raghu.dashboard.api", "com.raghu.dashboard.dao" })
+@ComponentScan(basePackages = { "com.raghu.dashboard.api", "com.raghu.dashboard.dao"})
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     protected Class<?>[] getRootConfigClasses() { return null;}
@@ -31,6 +34,12 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	public ITaskDAO taskDao() {
 		return new TaskDAOImpl();
 	}
+	
+	@Bean
+	public IDashBoardService dashboardService() {
+		return new DashBoardServiceImpl();
+	}
+	
 	
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
